@@ -23,6 +23,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('admin')->default(false);
             $table->boolean("activo")->default(true);
+            $table->char("tfaToken", 4)->default(null)->nullable();
+            $table->boolean("verified")->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

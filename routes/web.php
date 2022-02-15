@@ -22,6 +22,7 @@ Route::get('/', function () {
 
 Route::get('dashboard', [CustomAuthController::class, 'dashboard'])->name('dashboard'); 
 Route::get('login', [CustomAuthController::class, 'index'])->name('login');
+Route::post('verification', [CustomAuthController::class, 'verification'])->name('login.verification');
 Route::get('import', [ImportController::class, 'index'])->name('import.index');
 Route::post('import', [ImportController::class, 'import'])->name('import');
 Route::post('custom-login', [CustomAuthController::class, 'customLogin'])->name('login.custom'); 

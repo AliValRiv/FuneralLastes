@@ -32,5 +32,14 @@ class UserSeeder extends Seeder
             'admin' => true,
             'password' => Hash::make('123456'),
         ]);
+
+        DB::table('users')->insert([
+            'name' => "Luis Rodríguez",
+            'email' => "luis.rodriguez@alciscorp.com",
+            'mobile' => '5530281270',
+            'company_id' => 1,
+            'admin' => true,
+            'password' => Hash::make('12345678'),
+        ]);
     }
 }
