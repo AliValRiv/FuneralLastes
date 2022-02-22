@@ -18,6 +18,7 @@ class CreateCargasTable extends Migration
             $table->date('fecha_carga');
             $table->string('archivo');
             $table->integer('usuario');
+            $table->char('tipo');
             $table->string('comentarios',255)->nullable();
             $table->string('observaciones',255)->nullable();
             $table->boolean('status')->default(true);

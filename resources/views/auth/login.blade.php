@@ -40,15 +40,19 @@
 								<div class="d-flex flex-stack mb-2">
 									<!--begin::Label-->
 									<label class="form-label fw-bolder text-dark fs-6 mb-0">Contraseña</label>
-									<!--end::Label-->
-									<!--begin::Link ¿Olivdaste la contraseña?-->
-									<!--a href="../../demo6/dist/authentication/layouts/basic/password-reset.html" class="link-primary fs-6 fw-bolder">¿Olivdaste la contraseña?</a-->
-									<!--end::Link-->
 								</div>
 								<!--end::Wrapper-->
 								<!--begin::Input-->
 								<input class="form-control form-control-lg form-control-solid" type="password" name="password" autocomplete="off" />
 								<!--end::Input-->
+								@if($errors->any())
+									<label class="form-label fw-bolder text-danger fs-6 mb-0">Los datos son incorrectos</label>
+									<ul class="text-danger">
+										@foreach($errors->all() as $error)
+											<li>{{$error}}</li>
+										@endforeach
+									</ul>	
+								@endif
 							</div>
 							<!--end::Input group-->
 							<!--begin::Actions-->

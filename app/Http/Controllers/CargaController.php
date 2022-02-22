@@ -103,7 +103,7 @@ class CargaController extends Controller
         if($request->hasFile("file")){
             $file=$request->file("file");
             
-            $nombre = $request->input('email').date('Y-m-d_H-i-s').".".$file->guessExtension();
+            $nombre = $request->input('email').'_'.date('Y-m-d_H-i-s')."_alta.".$file->guessExtension();
 
             $ruta = public_path("cargas/".$nombre);
 
@@ -116,18 +116,48 @@ class CargaController extends Controller
                 $carga->usuario = (int)$request->input('user_id');
                 $carga->comentarios = $request->input('comentarios');
                 $carga->company_id = (int)$request->input('empresa_id');
+                $carga->tipo = 'a';
 
                 $carga->save();
             }else{
                 return redirect('dashboard')
-                        ->withErrors("No es un archivo valido.")
+                        ->withErrors("No es un archivo valido. Tiene que ser tipo xlsx, xls o csv.")
                         ->withInput();
             }
             return back();
         }
-
-        
     }
+
+    public function mguardarbajas(Request $request)
+    {
+        if($request->hasFile("file")){
+            $file=$request->file("file");
+            
+            $nombre = $request->input('email').'_'.date('Y-m-d_H-i-s')."_baja.".$file->guessExtension();
+
+            $ruta = public_path("cargas/".$nombre);
+
+            if($file->guessExtension()=="xlsx" or $file->guessExtension()=="xls" or $file->guessExtension()=="csv"){
+                copy($file, $ruta);
+                $carga = new Carga();
+
+                $carga->fecha_carga = date('Y/m/d');
+                $carga->archivo = $nombre;
+                $carga->usuario = (int)$request->input('user_id');
+                $carga->comentarios = $request->input('comentarios');
+                $carga->company_id = (int)$request->input('empresa_id');
+                $carga->tipo = 'b';
+
+                $carga->save();
+            }else{
+                return redirect('dashboard')
+                        ->withErrors("No es un archivo valido. Tiene que ser tipo xlsx, xls o csv.")
+                        ->withInput();
+            }
+            return back();
+        }
+    }
+
     public function status(Request $request)
     {
         $carga = Carga::find($request->input('id'));

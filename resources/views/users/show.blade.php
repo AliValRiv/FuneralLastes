@@ -14,7 +14,7 @@ Usuario
                     
                 </div>
             </div>
-            <form class="form" action="{{ route('users.update', $user->id) }}" method="POST" id="kt_modal_add_customer_form" data-kt-redirect="../../demo6/dist/apps/customers/list.html">
+            <form class="form" action="{{ route('users.update', $user->id) }}" method="POST" id="kt_modal_add_customer_form" data-kt-redirect="">
                 @csrf
                 {{ method_field('PATCH') }}
                 <div class="card-body">
@@ -54,7 +54,7 @@ Usuario
                             <label class="required fs-6 fw-bold mb-2">Empresa</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <select class="form-select" aria-label="Empresa" name="company_id"'>
+                            <select class="form-select" aria-label="Empresa" name="company_id">
 								<option>Seleccionar Empresa</option>
 								@foreach($empresas as $empresa)
 								<option value="{{ $empresa->id}}" {{$empresa->id == $user->company_id ? 'selected':''}}>{{$empresa->nombre}}</option>
@@ -66,16 +66,16 @@ Usuario
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label class="required fs-6 fw-bold mb-2">Contraseña</label>
+                            <label class=" fs-6 fw-bold mb-2">Generar Nueva Contraseña</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="password" class="form-control form-control-solid" maxlength="20" placeholder="Contraseña" name="password" value='{{ $user->password }}'/>
+                            <input type="password" class="form-control form-control-solid" maxlength="20" placeholder="(Dejar en blanco si no desea modificarla)" name="password" value=''/>
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->
                 </div>
                 <div class="card-footer">
-                <!--begin::Button-->
+                    <!--begin::Button-->
                     <button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary">
                         <span class="indicator-label">Guardar</span>
                         <span class="indicator-progress">Por favor espere...

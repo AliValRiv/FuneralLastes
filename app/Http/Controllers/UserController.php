@@ -107,10 +107,17 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        $user->fill($request->all())->save();
+        //$user->fill($request->all())->save();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->mobile = $request->input('mobile');
+        $user->company_id = $request->input('company_id');
+        $user->save();        
         $newpass = $request->input('password');
+        if ($newpass != ''){
         $user->password = Hash::make($newpass);
         $user->save();
+        }
 
         return back();
     }

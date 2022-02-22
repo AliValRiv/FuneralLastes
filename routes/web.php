@@ -40,6 +40,7 @@ Route::get('empresas/status', [EmpresaController::class, 'status'])->name('empre
 Route::resource('empresas', EmpresaController::class);
 
 Route::post('cargas/guardar', [CargaController::class, 'mguardar'])->name('cargas.guardar');
+Route::post('cargas/guardarbajas', [CargaController::class, 'mguardarbajas'])->name('cargas.guardarbajas');
 Route::get('cargas/status', [CargaController::class, 'status'])->name('cargas.status');
 Route::resource('cargas', CargaController::class);
 

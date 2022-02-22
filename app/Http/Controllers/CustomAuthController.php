@@ -59,7 +59,7 @@ class CustomAuthController extends Controller
             }
         }
   
-        return redirect('login')->withSuccess('Login details are not valid');
+        return redirect("login")->withErrors('Usuario o contraseña incorrectos');
     }
 
     public function verification(Request $request)
@@ -82,8 +82,8 @@ class CustomAuthController extends Controller
 
         Session::flush();
         Auth::logout();
-
-        return redirect('login')->withSuccess('Login details are not valid');
+        
+        return redirect("login")->withErrors('Código de verificación incorrecto');
     }
 
     public function registration()

@@ -14,7 +14,7 @@ Perfil
                     
                 </div>
             </div>
-            <form class="form" action="{{ route('users.profile.update') }}" method="POST" id="kt_modal_add_customer_form" data-kt-redirect="../../demo6/dist/apps/customers/list.html">
+            <form class="form" action="{{ route('users.profile.update') }}" method="POST" id="kt_modal_add_customer_form" >
                 @csrf
                 <div class="card-body">
                     <!--begin::Input group-->
