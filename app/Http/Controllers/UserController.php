@@ -112,6 +112,7 @@ class UserController extends Controller
         $user->email = $request->input('email');
         $user->mobile = $request->input('mobile');
         $user->company_id = $request->input('company_id');
+        $user->priv = $request->input('priv');
         $user->save();        
         $newpass = $request->input('password');
         if ($newpass != ''){

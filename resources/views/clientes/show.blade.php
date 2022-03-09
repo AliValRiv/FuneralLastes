@@ -67,7 +67,7 @@ Contacto
                             <label class="required fs-6 fw-bold mb-2">Genero</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <select class="form-select" aria-label="Genero" name="genero"'>
+                            <select class="form-select" aria-label="Genero" name="genero">
 								<option value="">Seleccionar Genero</option>
 								<option value="M" {{$cliente->genero == 'M' ? 'selected':''}}>MASCULINO</option>
                                 <option value="F" {{$cliente->genero == 'F' ? 'selected':''}}>FEMENINO</option>
@@ -159,13 +159,18 @@ Contacto
                         </div>
                     </div>
                 <div class="card-footer">
-                    <!--begin::Button-->
-                    <button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary">
+                    <!--begin::Buttons-->
+                    @if(Auth::User()->priv != 'cc')
+                    <button type="submit" id="kt_modal_add_customer_submit" class="btn btn-success">
                         <span class="indicator-label">Guardar</span>
                         <span class="indicator-progress">Por favor espere...
                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                     </button>
-                    <!--end::Button-->
+                    @endif
+                    <button type="button" class="btn btn-primary" onclick="location.href='/clientes'">
+                        <span class="indicator-label">Regresar</span>
+                    </button>
+                    <!--end::Buttons-->
                 </div>
             </form>
         </div>

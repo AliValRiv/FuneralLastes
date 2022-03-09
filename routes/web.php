@@ -35,6 +35,7 @@ Route::get('users/profile', [UserController::class, 'profile'])->name('users.pro
 Route::post('users/profile', [UserController::class, 'update_profile'])->name('users.profile.update');
 Route::resource('users', UserController::class);
 Route::get('clientes/status', [ClienteController::class, 'status'])->name('clientes.status'); 
+Route::get('clientes/index', [ClienteController::class, 'index'])->name('clientes.index');
 Route::resource('clientes', ClienteController::class);
 Route::get('empresas/status', [EmpresaController::class, 'status'])->name('empresas.status'); 
 Route::resource('empresas', EmpresaController::class);

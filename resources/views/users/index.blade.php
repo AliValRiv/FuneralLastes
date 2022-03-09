@@ -197,6 +197,21 @@
 							</select>
 						</div>
 						<!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="required fs-6 fw-bold mb-2">Privilegios</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <select class="form-select" aria-label="Privilegios" name="priv">
+								<option>Seleccionar Privilegios</option>
+								<option value="cl">Cliente</option>
+								<option value="cc">CallCenter</option>
+								<option value="ad">Administrador</option>
+							</select>
+                            <!--end::Input-->
+                        </div>
+                        <!--end::Input group-->
 						<!--begin::Input group-->
 						<div class="fv-row mb-7">
 							<!--begin::Label-->

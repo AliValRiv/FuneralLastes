@@ -32,6 +32,7 @@
 			<!--begin::Toolbar-->
 			<div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
 				<!--begin::Import-->
+				@if(Auth::User()->priv == 'cl')
 				<button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_customers_import_modal">
 				<!--begin::Svg Icon | path: assets/media/icons/duotune/files/fil022.svg-->
 				<span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -40,11 +41,13 @@
 				</svg></span>
 				<!--end::Svg Icon-->Cargar Archivo Altas</button>
 				<!--end::Import-->
+				@endif
 			</div>
 			<!--end::Toolbar-->
 			<!--begin::Toolbar-->
 			<div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
 				<!--begin::Import-->
+				@if(Auth::User()->priv == 'cl')
 				<button type="button" class="btn btn-light-warning me-3" data-bs-toggle="modal" data-bs-target="#kt_delete_customers_modal">
 				<!--begin::Svg Icon | path: assets/media/icons/duotune/files/fil021.svg-->
 				<span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -54,6 +57,7 @@
 				</svg></span>
 				<!--end::Svg Icon-->Cargar Archivo Bajas</button>
 				<!--end::Import-->
+				@endif	
 			</div>
 			<!--end::Toolbar-->
 		</div>
@@ -76,8 +80,10 @@
 					<th class="min-w-125px">Tipo</th>
 					<th class="min-w-125px">Comentarios</th>
 					<th class="min-w-125px">Observaciones</th>
-                    @if(Auth::User()->admin)
+                    @if(Auth::User()->priv != 'cl')
 					<th class="min-w-125px">Empresa</th>
+					@endif
+					@if(Auth::User()->admin)
 					<th class="text-end min-w-70px">Acciónes</th>
                     @endif
 				</tr>
@@ -100,7 +106,7 @@
 					@endif	
 					<td>{{ $carga->comentarios }}</td>
 					<td>{{ $carga->observaciones }}</td>
-                    @if(Auth::User()->admin)
+                    @if(Auth::User()->priv != "cl")
                     <td>{{$carga->empresa->nombre}}</td>
 					<!--begin::Action=-->
 					<td class="text-end">
@@ -164,7 +170,7 @@
 			<!--begin::Modal body-->
 			<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
 				<!--begin::Form-->
-				<form class="form" action="{{ route('cargas.guardar') }}" method="POST" enctype="multipart/form-data">
+				<form class="form" action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
 				@csrf	
                 <input type="hidden" name="email" value="{{ Auth::User()->email }}">
                 <input type="hidden" name="user_id" value="{{ Auth::User()->id }}">
@@ -257,7 +263,7 @@
 						</div>
 						<!--end::Input group-->
 						<button type="reset" id="kt_customers_export_cancel" class="btn btn-light me-3">Limpiar</button>
-						<button type="submit" id="kt_customers_export_submit" class="btn btn-primary">
+						<button type="submit" id="kt_delete_customers" class="btn btn-primary">
 							<span class="indicator-label">Importar Bajas</span>
 							<span class="indicator-progress">Por favor espere...
 							<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>

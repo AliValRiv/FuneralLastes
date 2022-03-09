@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Cliente;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\Carga;
+use App\Http\Requests\StoreCargaRequest;
+use App\Http\Requests\UpdateCargaRequest;
+use App\Models\User;
+
 class ClienteController extends Controller
 {
     /**
@@ -15,7 +20,18 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        if(Auth::check()) {
+            if(Auth::User()->priv == 'cl'){
+                $clientes = Cliente::where('empresa_id', Auth::User()->company_id)->get();
+                return view('clientes.index', ['clientes' => $clientes]);
+            }
+            else {
+                $clientes = Cliente::all();
+                return view('clientes.index', ['clientes' => $clientes]);
+            }
+        }
+  
+        return redirect("login")->withSuccess('No se permitió el acceso');
     }
 
     /**
@@ -108,5 +124,5 @@ class ClienteController extends Controller
         //
     }
 
-
+    
 }

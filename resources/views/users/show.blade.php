@@ -66,6 +66,21 @@ Usuario
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
+                            <label class="required fs-6 fw-bold mb-2">Privilegios</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <select class="form-select" aria-label="Pivilegios" name="priv">
+								<option>Seleccionar Privilegios</option>
+								<option value="cl" {{$user->priv == "cl" ? 'selected':''}}>Cliente</option>
+								<option value="cc" {{$user->priv == "cc" ? 'selected':''}}>CallCenter</option>
+								<option value="ad" {{$user->priv == "ad" ? 'selected':''}}>Administrador</option>
+							</select>
+                            <!--end::Input-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
                             <label class=" fs-6 fw-bold mb-2">Generar Nueva Contraseña</label>
                             <!--end::Label-->
                             <!--begin::Input-->
@@ -76,10 +91,11 @@ Usuario
                 </div>
                 <div class="card-footer">
                     <!--begin::Button-->
-                    <button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary">
-                        <span class="indicator-label">Guardar</span>
-                        <span class="indicator-progress">Por favor espere...
-                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                    <button type="submit" id="kt_modal_add_customer_submit" class="btn btn-success">
+                        <span class="indicator-label">Guardar</span></span>
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="location.href='/users'">
+                        <span class="indicator-label">Regresar</span>
                     </button>
                     <!--end::Button-->
                 </div>

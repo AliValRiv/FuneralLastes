@@ -166,4 +166,6 @@ class CargaController extends Controller
 
         return back();
     }
+
+    
 }

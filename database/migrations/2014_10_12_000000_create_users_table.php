@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('admin')->default(false);
+            $table->char('priv',2);
             $table->boolean("activo")->default(true);
             $table->char("tfaToken", 4)->default(null)->nullable();
             $table->boolean("verified")->default(false);

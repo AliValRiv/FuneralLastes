@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
             'mobile' => '6251272842',
             'company_id' => 1,
             'admin' => true,
+            'priv' => 'ad',
             'password' => Hash::make('615243'),
         ]);
 
@@ -30,6 +31,7 @@ class UserSeeder extends Seeder
             'mobile' => '6251011694',
             'company_id' => 1,
             'admin' => true,
+            'priv' => 'ad',
             'password' => Hash::make('123456'),
         ]);
 
@@ -39,6 +41,7 @@ class UserSeeder extends Seeder
             'mobile' => '5530281270',
             'company_id' => 1,
             'admin' => true,
+            'priv' => 'ad',
             'password' => Hash::make('12345678'),
         ]);
     }
