@@ -82,9 +82,7 @@
 					<th class="min-w-125px">Observaciones</th>
                     @if(Auth::User()->priv != 'cl')
 					<th class="min-w-125px">Empresa</th>
-					@endif
-					@if(Auth::User()->admin)
-					<th class="text-end min-w-70px">Acciónes</th>
+					<th class="min-w-70px">Acciónes</th>
                     @endif
 				</tr>
 				<!--end::Table row-->
@@ -125,6 +123,7 @@
 								<a href="{{ route('cargas.show', $carga->id) }}" class="menu-link px-3">Ver</a>
 							</div>
 							<!--end::Menu item-->
+							@if(Auth::User()->admin)
 							<!--begin::Menu item-->
 							<div class="menu-item px-3">
 								@if(!$carga->status)
@@ -139,6 +138,7 @@
 								<a href="{{'cargas/'.$carga->archivo}}"  class="menu-link px-3">Descargar</a>
 							</div>
 							<!--end::Menu item-->
+							@endif
 						</div>
 						<!--end::Menu-->
 					</td>

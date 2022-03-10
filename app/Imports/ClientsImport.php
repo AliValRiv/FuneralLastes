@@ -19,7 +19,7 @@ class ClientsImport implements ToModel, WithHeadingRow, WithValidation
     public function model(array $row)
     {
         ++$this->numRows;
-        
+        /* 
         $cliente = Cliente::where('empleado', $row['empleado'])->first();
  
         if ($cliente === null) {
@@ -72,7 +72,7 @@ class ClientsImport implements ToModel, WithHeadingRow, WithValidation
             $cliente->opc6 = $row['opc6'];
              
             $cliente->save();
-        }
+        } */
 
         //$user = User::firstOrCreate(['name' => 'John Doe']);
         
@@ -99,7 +99,7 @@ class ClientsImport implements ToModel, WithHeadingRow, WithValidation
             'empresa_id' => Auth::User()->company_id,
             'activo' => true,]); */
 
-        /* return new Cliente([
+        return new Cliente([
             'empleado' => $row['empleado'],
             'paterno' => $row['paterno'],
             'materno' => $row['materno'],
@@ -121,7 +121,7 @@ class ClientsImport implements ToModel, WithHeadingRow, WithValidation
             'opc6' => $row['opc6'],
             'empresa_id' => Auth::User()->company_id,
             'activo' => true,
-        ]); */
+        ]);
         
     }
  

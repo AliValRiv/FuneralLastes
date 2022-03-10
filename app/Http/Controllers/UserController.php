@@ -52,6 +52,7 @@ class UserController extends Controller
         $user->mobile = $request->input('mobile');
         $user->company_id = (int)$num;
         $user->admin = false;
+        $user->priv = 'cl';
         $user->password = Hash::Make($request->input('password'));
 
         $user->save();
@@ -120,7 +121,7 @@ class UserController extends Controller
         $user->save();
         }
 
-        return back();
+        return redirect('users')->with( ['message'=>'Actualización realizada correctamente.','message_type'=>'success']);
     }
 
     /**

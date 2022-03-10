@@ -21,8 +21,6 @@ Contacto
                     <div class="card-body">
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
-                            <!--begin::Input group-->
-                        <div class="fv-row mb-7">
                             <!--begin::Label-->
                             <label class="required fs-6 fw-bold mb-2">No. Empelado</label>
                             <!--end::Label-->
@@ -44,7 +42,7 @@ Contacto
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label class="required fs-6 fw-bold mb-2">Apellido Materno</label>
+                            <label class="fs-6 fw-bold mb-2">Apellido Materno</label>
                             <!--end::Label-->
                             <!--begin::Input-->
                             <input type="text" class="form-control form-control-solid" maxlength="255" placeholder="Apellido Materno" name="materno" value='{{ $cliente->materno }}'/>
@@ -64,14 +62,13 @@ Contacto
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label class="required fs-6 fw-bold mb-2">Genero</label>
+                            <label class="fs-6 fw-bold mb-2">Genero</label>
                             <!--end::Label-->
                             <!--begin::Input-->
                             <select class="form-select" aria-label="Genero" name="genero">
 								<option value="">Seleccionar Genero</option>
 								<option value="M" {{$cliente->genero == 'M' ? 'selected':''}}>MASCULINO</option>
                                 <option value="F" {{$cliente->genero == 'F' ? 'selected':''}}>FEMENINO</option>
-                                
 							</select>
                             <!--end::Input-->
                         </div>
@@ -89,7 +86,7 @@ Contacto
                             <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label class="required fs-6 fw-bold mb-2">Fecha de Inicio de Vigencia</label>
+                            <label class="fs-6 fw-bold mb-2">Fecha de Inicio de Vigencia</label>
                             <!--end::Label-->
                             <!--begin::Input-->
                             <input type="date" class="form-control form-control-solid" placeholder="dd/MM/yyyy" name="fecha_inicio" value='{{ $cliente->fecha_inicio }}'/>
@@ -99,7 +96,7 @@ Contacto
                             <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label class="required fs-6 fw-bold mb-2">Fecha de Fin de Vigencia</label>
+                            <label class="fs-6 fw-bold mb-2">Fecha de Fin de Vigencia</label>
                             <!--end::Label-->
                             <!--begin::Input-->
                             <input type="date" class="form-control form-control-solid" placeholder="dd/MM/yyyy" name="fecha_fin" value='{{ $cliente->fecha_fin }}'/>
@@ -156,7 +153,66 @@ Contacto
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-15">
+                            <!--begin::Label-->
+                            <label class="fs-6 fw-bold mb-2">Opcional 1</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" class="form-control form-control-solid" maxlength="100" placeholder="Opcional" name="opc1"  value='{{ $cliente->opc1 }}'/>
+                            <!--end::Input-->
                         </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-15">
+                            <!--begin::Label-->
+                            <label class="fs-6 fw-bold mb-2">Opcional 2</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" class="form-control form-control-solid" maxlength="100" placeholder="Opcional" name="opc2"  value='{{ $cliente->opc2 }}'/>
+                            <!--end::Input-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-15">
+                            <!--begin::Label-->
+                            <label class="fs-6 fw-bold mb-2">Opcional 3</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" class="form-control form-control-solid" maxlength="100" placeholder="Opcional" name="opc3"  value='{{ $cliente->opc3 }}'/>
+                            <!--end::Input-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-15">
+                            <!--begin::Label-->
+                            <label class="fs-6 fw-bold mb-2">Opcional 4</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" class="form-control form-control-solid" maxlength="100" placeholder="Opcional" name="opc4"  value='{{ $cliente->opc4 }}'/>
+                            <!--end::Input-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-15">
+                            <!--begin::Label-->
+                            <label class="fs-6 fw-bold mb-2">Opcional 5</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" class="form-control form-control-solid" maxlength="100" placeholder="Opcional" name="opc5"  value='{{ $cliente->opc5 }}'/>
+                            <!--end::Input-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-15">
+                            <!--begin::Label-->
+                            <label class="fs-6 fw-bold mb-2">Opcional 6</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" class="form-control form-control-solid" maxlength="100" placeholder="Opcional" name="opc6"  value='{{ $cliente->opc6 }}'/>
+                            <!--end::Input-->
+                        </div>
+                        <!--end::Input group-->
                     </div>
                 <div class="card-footer">
                     <!--begin::Buttons-->

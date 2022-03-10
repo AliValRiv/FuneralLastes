@@ -203,7 +203,7 @@
 						<!--begin::Input group-->
 						<div class="fv-row mb-7">
 							<!--begin::Label-->
-							<label class="required fs-6 fw-bold mb-2">Apellido Materno</label>
+							<label class="fs-6 fw-bold mb-2">Apellido Materno</label>
 							<!--end::Label-->
 							<!--begin::Input-->
 							<input type="text" class="form-control form-control-solid" maxlength="255" placeholder="Apellido Materno" name="materno"/>

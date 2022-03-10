@@ -65,19 +65,21 @@ class CustomAuthController extends Controller
     public function verification(Request $request)
     {
         $request->validate([
-            'digit_1' => 'required',
+            'ver_code' => 'required',
+            /* 'digit_1' => 'required',
             'digit_2' => 'required',
             'digit_3' => 'required',
-            'digit_4' => 'required',
+            'digit_4' => 'required', */
         ]);
    
-        $tfaToken = $request->input('digit_1') . $request->input('digit_2') . $request->input('digit_3') . $request->input('digit_4');
+        $tfaToken = $request->input('ver_code');
+        /* $tfaToken = $request->input('digit_1') . $request->input('digit_2') . $request->input('digit_3') . $request->input('digit_4'); */
 
         if (Auth::User()->tfaToken == $tfaToken) {
             Auth::User()->verified = true;
             Auth::User()->save();
 
-            return redirect()->intended('dashboard')->withSuccess('Signed in');
+            return redirect()->intended('dashboard')->withSuccess('Verificación exitosa.');
         }
 
         Session::flush();
@@ -121,7 +123,7 @@ class CustomAuthController extends Controller
     {
          if(Auth::check()) {
             if (Auth::User()->verified) {
-                if(!Auth::User()->admin){
+                if(Auth::User()->priv == 'cl' && Auth::User()->company_id != 1){
                     $cargas = Carga::where('company_id', Auth::User()->company_id)->get();
                     return view('dashboard', ['cargas' => $cargas]);
                 }

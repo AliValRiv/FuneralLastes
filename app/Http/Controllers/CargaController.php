@@ -8,6 +8,9 @@ use App\Http\Requests\StoreCargaRequest;
 use App\Http\Requests\UpdateCargaRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\ClientsDelete;
+use App\Models\Cliente;
 
 class CargaController extends Controller
 {
@@ -130,6 +133,7 @@ class CargaController extends Controller
 
     public function mguardarbajas(Request $request)
     {
+        $contador = 0;
         if($request->hasFile("file")){
             $file=$request->file("file");
             
@@ -138,6 +142,18 @@ class CargaController extends Controller
             $ruta = public_path("cargas/".$nombre);
 
             if($file->guessExtension()=="xlsx" or $file->guessExtension()=="xls" or $file->guessExtension()=="csv"){
+                
+                $clientes = Excel::toCollection(new ClientsDelete, request()->file('file'));
+                //dd($clientes);
+
+                foreach($clientes as $cli){
+                    foreach($cli as $row){
+                        Cliente::where('empleado',$row['empleado'])->where('empresa_id',Auth::User()->company_id)->update(['activo' => false]);
+                        $contador++;
+                    }
+                }
+
+
                 copy($file, $ruta);
                 $carga = new Carga();
 
@@ -154,7 +170,8 @@ class CargaController extends Controller
                         ->withErrors("No es un archivo valido. Tiene que ser tipo xlsx, xls o csv.")
                         ->withInput();
             }
-            return back();
+            return redirect()->route('dashboard')->with( ['message'=>'Se inactivaron '.$contador." registros correctamente.",'message_type'=>'alert']);
+            //return back();
         }
     }
 
