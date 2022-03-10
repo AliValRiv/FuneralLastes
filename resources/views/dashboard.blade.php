@@ -32,14 +32,15 @@
 			<!--begin::Toolbar-->
 			<div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
 				<!--begin::Import-->
-				@if(Auth::User()->priv == 'cl')
+				@if(Auth::User()->priv === 'cl')
 				<button type="button" class="btn btn-light-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_customers_import_modal">
 				<!--begin::Svg Icon | path: assets/media/icons/duotune/files/fil022.svg-->
 				<span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 				<path opacity="0.3" d="M5 16C3.3 16 2 14.7 2 13C2 11.3 3.3 10 5 10H5.1C5 9.7 5 9.3 5 9C5 6.2 7.2 4 10 4C11.9 4 13.5 5 14.3 6.5C14.8 6.2 15.4 6 16 6C17.7 6 19 7.3 19 9C19 9.4 18.9 9.7 18.8 10C18.9 10 18.9 10 19 10C20.7 10 22 11.3 22 13C22 14.7 20.7 16 19 16H5ZM8 13.6H16L12.7 10.3C12.3 9.89999 11.7 9.89999 11.3 10.3L8 13.6Z" fill="black"/>
 				<path d="M11 13.6V19C11 19.6 11.4 20 12 20C12.6 20 13 19.6 13 19V13.6H11Z" fill="black"/>
 				</svg></span>
-				<!--end::Svg Icon-->Cargar Archivo Altas</button>
+				<!--end::Svg Icon-->
+				Cargar Archivo Altas</button>
 				<!--end::Import-->
 				@endif
 			</div>
@@ -47,7 +48,7 @@
 			<!--begin::Toolbar-->
 			<div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
 				<!--begin::Import-->
-				@if(Auth::User()->priv == 'cl')
+				@if(Auth::User()->priv === 'cl')
 				<button type="button" class="btn btn-light-warning me-3" data-bs-toggle="modal" data-bs-target="#kt_delete_customers_modal">
 				<!--begin::Svg Icon | path: assets/media/icons/duotune/files/fil021.svg-->
 				<span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -55,7 +56,8 @@
 				<path d="M13 17.4V12C13 11.4 12.6 11 12 11C11.4 11 11 11.4 11 12V17.4H13Z" fill="black"/>
 				<path opacity="0.3" d="M8 17.4H16L12.7 20.7C12.3 21.1 11.7 21.1 11.3 20.7L8 17.4Z" fill="black"/>
 				</svg></span>
-				<!--end::Svg Icon-->Cargar Archivo Bajas</button>
+				<!--end::Svg Icon-->
+				Cargar Archivo Bajas</button>
 				<!--end::Import-->
 				@endif	
 			</div>
@@ -77,11 +79,11 @@
 					<!--end::Checkbox-->
 					<th class="min-w-125px">Fecha Carga</th>
 					<th class="min-w-125px">Archivo</th>
-					<th class="min-w-125px">Tipo</th>
+					<th class="min-w-50px">Tipo</th>
 					<th class="min-w-125px">Comentarios</th>
 					<th class="min-w-125px">Observaciones</th>
+					<th class="min-w-100px">Compañía</th>
                     @if(Auth::User()->priv != 'cl')
-					<th class="min-w-125px">Empresa</th>
 					<th class="min-w-70px">Acciónes</th>
                     @endif
 				</tr>
@@ -93,7 +95,7 @@
 				@foreach($cargas as $carga)
 				<tr class="text-{{ $carga->status ? 'grey-800 ext-hover-primary mb-1' : (($carga->tipo == 'a') ? 'success' : 'warning') }}">
 					<!--begin::Checkbox ES NECESARIO PARA QUE FUNCIONE LA BUSQUEDA, ORDENAMIENTO Y LISTADO-->
-					<td> </td>
+					<td>  </td>
 					<!--end::Checkbox-->
 					<td>{{ $carga->fecha_carga }}</td>
 					<td>{{ $carga->archivo }}</td>

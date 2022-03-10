@@ -18,6 +18,6 @@ class Cliente extends Model
 
     public function empresa()
     {
-        return $this->hasOne(Empresa::class);
+        return $this->hasOne(Empresa::class,'id','empresa_id');
     }
 }

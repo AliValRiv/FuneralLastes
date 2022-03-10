@@ -107,7 +107,7 @@
 					</td>
 					@if(Auth::User()->priv != 'cl')
 					<td>
-						{{ $cliente->empresa_id}}
+						{{ $cliente->empresa->nombre}}
 					</td>
 					@endif
 					<td>

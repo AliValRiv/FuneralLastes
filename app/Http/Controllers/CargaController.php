@@ -141,10 +141,9 @@ class CargaController extends Controller
 
             $ruta = public_path("cargas/".$nombre);
 
-            if($file->guessExtension()=="xlsx" or $file->guessExtension()=="xls" or $file->guessExtension()=="csv"){
+            if($file->guessExtension()=="xlsx" or $file->guessExtension()=="xls" /* or $file->guessExtension()=="csv" */){
                 
                 $clientes = Excel::toCollection(new ClientsDelete, request()->file('file'));
-                //dd($clientes);
 
                 foreach($clientes as $cli){
                     foreach($cli as $row){
@@ -167,7 +166,7 @@ class CargaController extends Controller
                 $carga->save();
             }else{
                 return redirect('dashboard')
-                        ->withErrors("No es un archivo valido. Tiene que ser tipo xlsx, xls o csv.")
+                        ->withErrors("No es un archivo valido. Tiene que ser tipo xlsx o xls.")
                         ->withInput();
             }
             return redirect()->route('dashboard')->with( ['message'=>'Se inactivaron '.$contador." registros correctamente.",'message_type'=>'alert']);

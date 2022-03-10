@@ -52,7 +52,6 @@ class CustomAuthController extends Controller
                         'from' => $twilio_number,
                         'body' => $message]);
                 } catch (Exception $e) {
-                    //dd("Error: ". $e->getMessage());
                 }
 
                 return view('auth.verification');
@@ -66,14 +65,9 @@ class CustomAuthController extends Controller
     {
         $request->validate([
             'ver_code' => 'required',
-            /* 'digit_1' => 'required',
-            'digit_2' => 'required',
-            'digit_3' => 'required',
-            'digit_4' => 'required', */
         ]);
    
         $tfaToken = $request->input('ver_code');
-        /* $tfaToken = $request->input('digit_1') . $request->input('digit_2') . $request->input('digit_3') . $request->input('digit_4'); */
 
         if (Auth::User()->tfaToken == $tfaToken) {
             Auth::User()->verified = true;
