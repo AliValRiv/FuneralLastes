@@ -45,14 +45,22 @@ class UserController extends Controller
     {
 	    $user = new User();
 
-        $num =  $request->input('company_id');
+        (int)$num =  $request->input('company_id');
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->mobile = $request->input('mobile');
-        $user->company_id = (int)$num;
+        $user->company_id = $num;
         $user->admin = false;
-        $user->priv = 'cl';
+        if ($num != '1'){
+            $user->priv = 'cl';
+        }
+        elseif($num == '1' and $request->input('priv') == 'cl'){
+            return back()->withErrors('Por ser de empresa Alciscorp, no puede seleccionar privilegios de cliente.');
+        }
+        else{
+            $user->priv = $request->input('priv');
+        }
         $user->password = Hash::Make($request->input('password'));
 
         $user->save();
@@ -113,7 +121,15 @@ class UserController extends Controller
         $user->email = $request->input('email');
         $user->mobile = $request->input('mobile');
         $user->company_id = $request->input('company_id');
-        $user->priv = $request->input('priv');
+        if ($request->input('company_id') != '1'){
+            $user->priv = 'cl';
+        }
+        elseif($request->input('company_id') == '1' and $request->input('priv') == 'cl'){
+            return back()->withErrors('Por ser de empresa Alciscorp, no puede seleccionar privilegios de cliente.');
+        }
+        else{
+            $user->priv = $request->input('priv');
+        }
         $user->save();        
         $newpass = $request->input('password');
         if ($newpass != ''){

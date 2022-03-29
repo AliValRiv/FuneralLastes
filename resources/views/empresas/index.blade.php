@@ -21,7 +21,7 @@
 					</svg>
 				</span>
 				<!--end::Svg Icon-->
-				<input type="text" data-kt-customer-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Búsqueda" />
+				<input type="text" id="txtBusqueda" onkeyup="Buscar();" class="form-control form-control-solid w-250px ps-15" placeholder="Búsqueda" />
 			</div>
 			<!--end::Search-->
 		</div>
@@ -47,6 +47,8 @@
 			<thead>
 				<!--begin::Table row-->
 				<tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+					<th class="w-10px pe-2">
+					</th>	
 					<th class="min-w-125px">ID</th>
 					<th class="min-w-125px">Empresa</th>
 					<th class="text-end min-w-70px">Acciónes</th>
@@ -58,6 +60,8 @@
 			<tbody class="fw-bold text-gray-600">
 				@foreach($empresas as $empresa)
 				<tr>
+					<td>
+					</td>
 					<td>
 						@if(!$empresa->activo)
 							<a class="text-danger" href="#" class="text-gray-800 text-hover-primary mb-1">{{ $empresa->id }}</a>
@@ -169,4 +173,28 @@
 	</div>
 </div>
 <!--end::Modals-->
+<script type="text/javascript">// < ![CDATA[
+	function Buscar() {
+		var tabla = document.getElementById('kt_customers_table');
+		var busqueda = document.getElementById('txtBusqueda').value.toLowerCase();
+		var cellsOfRow="";
+		var found=false;
+		var compareWith="";
+		for (var i = 1; i < tabla.rows.length; i++) {
+			cellsOfRow = tabla.rows[i].getElementsByTagName('td');
+			found = false;
+			for (var j = 0; j < cellsOfRow.length && !found; j++) { compareWith = cellsOfRow[j].innerHTML.toLowerCase(); if (busqueda.length == 0 || (compareWith.indexOf(busqueda) > -1))
+				{
+					found = true;
+				}
+			}
+			if(found)
+			{
+				tabla.rows[i].style.display = '';
+			} else {
+				tabla.rows[i].style.display = 'none';
+			}
+		}
+	}
+// ]]></script>
 @endsection

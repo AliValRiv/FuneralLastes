@@ -21,7 +21,7 @@
 					</svg>
 				</span>
 				<!--end::Svg Icon-->
-				<input type="text" data-kt-customer-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Búsqueda" />
+				<input type="text" id="txtBusqueda" onkeyup="Buscar();" class="form-control form-control-solid w-250px ps-15" placeholder="Búsqueda" />
 			</div>
 			<!--end::Search-->
 		</div>
@@ -46,7 +46,7 @@
 			<!--begin::Table head-->
 			<thead>
 				<!--begin::Table row-->
-					<tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+				<tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
 					<th class="w-10px pe-2">
 					</th>	
 					<th class="min-w-125px">Nombre</th>
@@ -103,7 +103,7 @@
 							<!--end::Menu item-->
                             <!--begin::Menu item-->
 							<div class="menu-item px-3">
-								@if(!$user->admin)
+								@if(!$user->admin and $user->company_id == '1')
 									<a href="{{ route('users.permisos', ['id' => $user->id, 'admin'=> true])}}" class="menu-link px-3" data-kt-customer-table-filter="delete_row">ADMIN</a>
 								@else
 									<a href="{{ route('users.permisos', ['id' => $user->id, 'admin'=> false])}}" class="menu-link px-3" data-kt-customer-table-filter="delete_row">NO ADMIN</a>
@@ -246,4 +246,28 @@
 	</div>
 </div>
 <!--end::Modals-->
+<script type="text/javascript">// < ![CDATA[
+	function Buscar() {
+		var tabla = document.getElementById('kt_customers_table');
+		var busqueda = document.getElementById('txtBusqueda').value.toLowerCase();
+		var cellsOfRow="";
+		var found=false;
+		var compareWith="";
+		for (var i = 1; i < tabla.rows.length; i++) {
+			cellsOfRow = tabla.rows[i].getElementsByTagName('td');
+			found = false;
+			for (var j = 0; j < cellsOfRow.length && !found; j++) { compareWith = cellsOfRow[j].innerHTML.toLowerCase(); if (busqueda.length == 0 || (compareWith.indexOf(busqueda) > -1))
+				{
+					found = true;
+				}
+			}
+			if(found)
+			{
+				tabla.rows[i].style.display = '';
+			} else {
+				tabla.rows[i].style.display = 'none';
+			}
+		}
+	}
+// ]]></script>
 @endsection

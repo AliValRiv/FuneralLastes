@@ -84,10 +84,15 @@ Carga
                     </div>
                 <div class="card-footer">
                     <!--begin::Button-->
+                    @if(Auth::User()->admin)
                     <button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary">
                         <span class="indicator-label">Guardar</span>
                         <span class="indicator-progress">Por favor espere...
                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                    </button>
+                    @endif
+                    <button type="button" class="btn btn-primary" onclick="location.href='/dashboard'">
+                        <span class="indicator-label">Regresar</span>
                     </button>
                     <!--end::Button-->
                 </div>

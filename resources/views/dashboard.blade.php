@@ -13,17 +13,17 @@
 		<!--begin::Card title-->
 		<div class="card-title">
 			<!--begin::Search-->
+
 			<div class="d-flex align-items-center position-relative my-1">
-				<!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
 				<span class="svg-icon svg-icon-1 position-absolute ms-6">
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 						<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black" />
 						<path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black" />
 					</svg>
 				</span>
-				<!--end::Svg Icon-->
-				<input type="text" data-kt-customer-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Búsqueda" />
+				<input type="text" id="txtBusqueda" onkeyup="Buscar();" class="form-control form-control-solid w-250px ps-15" placeholder="Búsqueda" />
 			</div>
+
 			<!--end::Search-->
 		</div>
 		<!--begin::Card title-->
@@ -70,19 +70,23 @@
 	<div class="card-body pt-0">
 		<!--begin::Table-->
 		<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
+		<!-- <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table"> -->
 			<!--begin::Table head-->
 			<thead>
 				<!--begin::Table row-->
 				<tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
 					<!--begin::Checkbox ES NECESARIO PARA QUE FUNCIONE LA BUSQUEDA, ORDENAMIENTO Y LISTADO-->
-					<th class="w-10px pe-2"> </th>
+					<th class="w-10px pe-2">
+					</th>
 					<!--end::Checkbox-->
+                    @if(Auth::User()->priv != 'cl')
+					<th class="min-w-100px">Empresa</th>
+					@endif
 					<th class="min-w-125px">Fecha Carga</th>
 					<th class="min-w-125px">Archivo</th>
 					<th class="min-w-50px">Tipo</th>
 					<th class="min-w-125px">Comentarios</th>
 					<th class="min-w-125px">Observaciones</th>
-					<th class="min-w-100px">Compañía</th>
                     @if(Auth::User()->priv != 'cl')
 					<th class="min-w-70px">Acciónes</th>
                     @endif
@@ -95,11 +99,15 @@
 				@foreach($cargas as $carga)
 				<tr class="text-{{ $carga->status ? 'grey-800 ext-hover-primary mb-1' : (($carga->tipo == 'a') ? 'success' : 'warning') }}">
 					<!--begin::Checkbox ES NECESARIO PARA QUE FUNCIONE LA BUSQUEDA, ORDENAMIENTO Y LISTADO-->
-					<td>  </td>
+					<td>
+					</td>
 					<!--end::Checkbox-->
+                    @if(Auth::User()->priv != "cl")
+                    <td>{{$carga->empresa->nombre}}</td>
+					@endif
 					<td>{{ $carga->fecha_carga }}</td>
 					<td>{{ $carga->archivo }}</td>
-					@if ($carga->tipo == 'a')
+					@if ($carga->tipo === 'a')
 						<td>Alta</td>
 					@else
 						<td>Baja</td>
@@ -107,7 +115,6 @@
 					<td>{{ $carga->comentarios }}</td>
 					<td>{{ $carga->observaciones }}</td>
                     @if(Auth::User()->priv != "cl")
-                    <td>{{$carga->empresa->nombre}}</td>
 					<!--begin::Action=-->
 					<td class="text-end">
 						<a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Acciónes
@@ -283,5 +290,29 @@
 </div>
 <!--end::Modal - BAJA DE REGISTROS - New Card-->
 <!--end::Modals-->
+<script type="text/javascript">// < ![CDATA[
+	function Buscar() {
+		var tabla = document.getElementById('kt_customers_table');
+		var busqueda = document.getElementById('txtBusqueda').value.toLowerCase();
+		var cellsOfRow="";
+		var found=false;
+		var compareWith="";
+		for (var i = 1; i < tabla.rows.length; i++) {
+			cellsOfRow = tabla.rows[i].getElementsByTagName('td');
+			found = false;
+			for (var j = 0; j < cellsOfRow.length && !found; j++) { compareWith = cellsOfRow[j].innerHTML.toLowerCase(); if (busqueda.length == 0 || (compareWith.indexOf(busqueda) > -1))
+				{
+					found = true;
+				}
+			}
+			if(found)
+			{
+				tabla.rows[i].style.display = '';
+			} else {
+				tabla.rows[i].style.display = 'none';
+			}
+		}
+	}
+// ]]></script>
 @endsection
 

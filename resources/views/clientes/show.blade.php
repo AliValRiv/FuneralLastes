@@ -25,7 +25,7 @@ Contacto
                             <label class="required fs-6 fw-bold mb-2">No. Empelado</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="text" class="form-control form-control-solid"  maxlength="100" placeholder="No. Empleado" name="empleado" value='{{ $cliente->empleado }}'/>
+                            <input type="text" class="form-control form-control" disabled maxlength="100" placeholder="No. Empleado" name="empleado" value='{{ $cliente->empleado }}'/>
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->
@@ -65,11 +65,7 @@ Contacto
                             <label class="fs-6 fw-bold mb-2">Genero</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <select class="form-select" aria-label="Genero" name="genero">
-								<option value="">Seleccionar Genero</option>
-								<option value="M" {{$cliente->genero == 'M' ? 'selected':''}}>MASCULINO</option>
-                                <option value="F" {{$cliente->genero == 'F' ? 'selected':''}}>FEMENINO</option>
-							</select>
+                            <input type="text" class="form-control form-control-solid" maxlength="1" placeholder="M/F" name="genero" value='{{ $cliente->genero }}'/>
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->

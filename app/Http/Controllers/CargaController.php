@@ -124,7 +124,7 @@ class CargaController extends Controller
                 $carga->save();
             }else{
                 return redirect('dashboard')
-                        ->withErrors("No es un archivo valido. Tiene que ser tipo xlsx, xls o csv.")
+                        ->withErrors("No es un archivo valido. Tiene que ser tipo xlsx o xls")
                         ->withInput();
             }
             return back();
@@ -141,7 +141,7 @@ class CargaController extends Controller
 
             $ruta = public_path("cargas/".$nombre);
 
-            if($file->guessExtension()=="xlsx" or $file->guessExtension()=="xls" /* or $file->guessExtension()=="csv" */){
+            if($file->guessExtension()=="xlsx" or $file->guessExtension()=="xls"){
                 
                 $clientes = Excel::toCollection(new ClientsDelete, request()->file('file'));
 
@@ -162,6 +162,8 @@ class CargaController extends Controller
                 $carga->comentarios = $request->input('comentarios');
                 $carga->company_id = (int)$request->input('empresa_id');
                 $carga->tipo = 'b';
+                $carga->status = false;
+                $carga->observaciones = 'Las bajas realizaron correctamente.';
 
                 $carga->save();
             }else{
