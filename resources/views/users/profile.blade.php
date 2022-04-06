@@ -33,7 +33,7 @@ Perfil
                         <label class="required fs-6 fw-bold mb-2">Contraseña Nueva</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <input type="password" class="form-control form-control-solid" placeholder="Contraseña Nueva" name="password"/>
+                        <input type="password" class="form-control form-control-solid" maxlength="255" placeholder="Contraseña Nueva" name="password"/>
                         <!--end::Input-->
                     </div>
                     <!--end::Input group-->
@@ -43,7 +43,7 @@ Perfil
                         <label class="required fs-6 fw-bold mb-2">Confirmar Contraseña</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <input type="password" class="form-control form-control-solid" placeholder="Confirmar Contraseña" name="password_confirmation"/>
+                        <input type="password" class="form-control form-control-solid" maxlength="255" placeholder="Confirmar Contraseña" name="password_confirmation"/>
                         <!--end::Input-->
                     </div>
                     <!--end::Input group-->
