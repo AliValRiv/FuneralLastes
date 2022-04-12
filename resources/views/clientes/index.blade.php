@@ -60,7 +60,7 @@
 	<!--begin::Card body-->
 	<div class="card-body pt-0">
 		<!--begin::Table-->
-		<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
+		<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table_new">
 			<!--begin::Table head-->
 			<thead>
 				<!--begin::Table row-->
@@ -163,6 +163,7 @@
 			</tbody>
 			<!--end::Table body-->
 		</table>
+		{{ $clientes->links() }}
 		<!--end::Table-->
 	</div>
 	<!--end::Card body-->
@@ -400,7 +401,7 @@
 <!--end::Modals-->
 <script type="text/javascript">// < ![CDATA[
 	function Buscar() {
-		var tabla = document.getElementById('kt_customers_table');
+		var tabla = document.getElementById('kt_customers_table_new');
 		var busqueda = document.getElementById('txtBusqueda').value.toLowerCase();
 		var cellsOfRow="";
 		var found=false;

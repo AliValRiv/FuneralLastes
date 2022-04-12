@@ -179,7 +179,7 @@
 			<!--begin::Modal body-->
 			<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
 				<!--begin::Form-->
-				<form class="form" action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+				<form class="form" action="{{ route('import') }}" id="kt_modal_add_customer_form" method="POST" enctype="multipart/form-data">
 				@csrf	
                 <input type="hidden" name="email" value="{{ Auth::User()->email }}">
                 <input type="hidden" name="user_id" value="{{ Auth::User()->id }}">
@@ -208,7 +208,7 @@
 						</div>
 						<!--end::Input group-->
 						<button type="reset" id="kt_customers_export_cancel" class="btn btn-light me-3">Limpiar</button>
-						<button type="submit" id="kt_customers_export_submit" class="btn btn-primary">
+						<button type="submit" id="kt_customers_export_submit" class="btn btn-primary" onClick="this.form.submit(); this.value='Enviando...'; this.disabled=true;">
 							<span class="indicator-label">Importar Altas</span>
 							<span class="indicator-progress">Por favor espere...
 							<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>

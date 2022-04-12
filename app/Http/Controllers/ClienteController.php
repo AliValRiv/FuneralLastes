@@ -22,12 +22,12 @@ class ClienteController extends Controller
     {
         if(Auth::check()) {
             if(Auth::User()->priv == 'cl'){
-                $clientes = Cliente::where('empresa_id', Auth::User()->company_id)->get();
-                return view('clientes.index', ['clientes' => $clientes]);
+                $clientes = Cliente::where('empresa_id', Auth::User()->company_id)->paginate(500);
+                return view('clientes.index', compact('clientes'));
             }
             else {
-                $clientes = Cliente::all();
-                return view('clientes.index', ['clientes' => $clientes]);
+                $clientes = Cliente::paginate(500);
+                return view('clientes.index', compact('clientes'));
             }
         }
   

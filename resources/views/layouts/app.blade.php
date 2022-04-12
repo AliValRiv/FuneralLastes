@@ -43,7 +43,7 @@
 							<!--begin::Menu-->
 							<div class="menu menu-column menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-bold" id="#kt_aside_menu" data-kt-menu="true">
 								<div class="menu-item py-2">
-									<a class="menu-link active menu-center" href="{{ route('dashboard') }}" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+									<a class="menu-link menu-center {{ ! Route::is('dashboard') ?: 'active' }}" href="{{ route('dashboard') }}"  data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
 										<span class="menu-icon me-0">
 											<i class="bi bi-house fs-2"></i>
 										</span>
@@ -51,19 +51,21 @@
 									</a>
 								</div>
 								<div class="menu-item py-2">
-									<a class="menu-link active menu-center" href="{{ route('clientes.index') }}" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+									<a class="menu-link menu-center btn-active-icon-primary {{ ! Route::is('clientes.index') ?: 'active' }}" href="{{ route('clientes.index') }}" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
 										<!--begin::Svg Icon | path: assets/media/icons/duotune/general/gen005.svg-->
-										<span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-										<path opacity="0.3" d="M19 22H5C4.4 22 4 21.6 4 21V3C4 2.4 4.4 2 5 2H14L20 8V21C20 21.6 19.6 22 19 22ZM15 17C15 16.4 14.6 16 14 16H8C7.4 16 7 16.4 7 17C7 17.6 7.4 18 8 18H14C14.6 18 15 17.6 15 17ZM17 12C17 11.4 16.6 11 16 11H8C7.4 11 7 11.4 7 12C7 12.6 7.4 13 8 13H16C16.6 13 17 12.6 17 12ZM17 7C17 6.4 16.6 6 16 6H8C7.4 6 7 6.4 7 7C7 7.6 7.4 8 8 8H16C16.6 8 17 7.6 17 7Z" fill="black"/>
-										<path d="M15 8H20L14 2V7C14 7.6 14.4 8 15 8Z" fill="black"/>
-										</svg></span>
+										<span class="svg-icon svg-icon-1 svg-icon-2hx">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+												<path opacity="0.3" d="M19 22H5C4.4 22 4 21.6 4 21V3C4 2.4 4.4 2 5 2H14L20 8V21C20 21.6 19.6 22 19 22ZM15 17C15 16.4 14.6 16 14 16H8C7.4 16 7 16.4 7 17C7 17.6 7.4 18 8 18H14C14.6 18 15 17.6 15 17ZM17 12C17 11.4 16.6 11 16 11H8C7.4 11 7 11.4 7 12C7 12.6 7.4 13 8 13H16C16.6 13 17 12.6 17 12ZM17 7C17 6.4 16.6 6 16 6H8C7.4 6 7 6.4 7 7C7 7.6 7.4 8 8 8H16C16.6 8 17 7.6 17 7Z" fill="black"/>
+												<path d="M15 8H20L14 2V7C14 7.6 14.4 8 15 8Z" fill="black"/>
+											</svg>
+										</span>
 										<!--end::Svg Icon-->
 										<span class="menu-title">Clientes</span>
 									</a>
 								</div>
 								@if(Auth::User()->admin)
 								<div data-kt-menu-trigger="click" data-kt-menu-placement="right-start" class="menu-item py-2">
-									<span class="menu-link menu-center" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+									<span class="menu-link menu-center {{ Route::is('users.index') ? 'active' : (Route::is('empresas.index') ? 'active' : '') }}" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
 										<span class="menu-icon me-0">
 											<i class="bi bi-file-earmark-lock fs-2"></i>
 										</span>

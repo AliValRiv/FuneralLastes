@@ -123,6 +123,7 @@ class UserController extends Controller
         $user->company_id = $request->input('company_id');
         if ($request->input('company_id') != '1'){
             $user->priv = 'cl';
+            $user->admin = false;
         }
         elseif($request->input('company_id') == '1' and $request->input('priv') == 'cl'){
             return back()->withErrors('Por ser de empresa Alciscorp, no puede seleccionar privilegios de cliente.');

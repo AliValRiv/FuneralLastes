@@ -14,6 +14,7 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use App\Imports\ClientsDelete;
 use Illuminate\Support\Facades\Validator;
+use Exceptions;
   
 class ImportController extends Controller
 {
@@ -39,7 +40,7 @@ class ImportController extends Controller
             if($file->guessExtension()=="xlsx" or $file->guessExtension()=="xls" /* or $file->guessExtension()=="csv" */){
                 try{
                     Excel::import(new ClientsImport,request()->file('file'));
-                }    
+                }     
                 catch(\InvalidArgumentException $ex){
                     return redirect('dashboard')
                             ->withErrors("Existe un error en los datos.")
@@ -50,7 +51,12 @@ class ImportController extends Controller
                             ->withErrors("Existe un error columnas de fechas.")
                             ->withInput();
                 }
-
+                catch(\ErrorExeption $ex){
+                    return redirect('dashboard')
+                            ->withErrors("Existe un error columnas de fechas.")
+                            ->withInput();
+                } 
+                
                 $nombre = $request->input('email').'_'.date('Y-m-d_H-i-s')."_alta.".$file->guessExtension();
                 $ruta = public_path("cargas/".$nombre);
                 copy($file, $ruta);

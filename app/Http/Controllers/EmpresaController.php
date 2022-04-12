@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Empresa;
+use App\Models\Cliente;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class EmpresaController extends Controller
@@ -93,6 +95,14 @@ class EmpresaController extends Controller
         $empresa = Empresa::find($request->input('id'));
         $empresa->activo = $request->input('status');
         $empresa->save();
+
+        User::where('company_id',$request->input('id'))
+                ->where('activo',true)
+                ->update(['activo'=>false]);
+                
+        Cliente::where('empresa_id',$request->input('id'))
+                ->where('activo',true)
+                ->update(['activo'=>false]);
 
         return back();
     }
