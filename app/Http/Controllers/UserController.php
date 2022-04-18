@@ -129,7 +129,14 @@ class UserController extends Controller
             return back()->withErrors('Por ser de empresa Alciscorp, no puede seleccionar privilegios de cliente.');
         }
         else{
-            $user->priv = $request->input('priv');
+            if($request->input('priv') == 'ad'){
+                $user->priv = $request->input('priv');
+                $user->admin = true;
+            }
+            else{
+                $user->priv = $request->input('priv');
+                $user->admin = false;
+            }
         }
         $user->save();        
         $newpass = $request->input('password');
@@ -211,6 +218,12 @@ class UserController extends Controller
     {
         $user = User::find($request->input('id'));
         $user->admin = $request->input('admin');
+        if($request->input('admin')==false){
+            $user->priv = 'cc';
+        }
+        if($request->input('admin')==true){
+            $user->priv = 'ad';
+        }
         $user->save();
 
         return back();

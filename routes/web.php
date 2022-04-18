@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\CargaController;
+use App\Http\Controllers\DatatableController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,15 +35,17 @@ Route::get('users/permisos', [UserController::class, 'permisos'])->name('users.p
 Route::get('users/profile', [UserController::class, 'profile'])->name('users.profile');
 Route::post('users/profile', [UserController::class, 'update_profile'])->name('users.profile.update');
 Route::resource('users', UserController::class);
-Route::get('clientes/status', [ClienteController::class, 'status'])->name('clientes.status'); 
+Route::post('clientes/status', [ClienteController::class, 'status'])->name('clientes.status'); 
 Route::get('clientes/index', [ClienteController::class, 'index'])->name('clientes.index');
 Route::resource('clientes', ClienteController::class);
 Route::get('empresas/status', [EmpresaController::class, 'status'])->name('empresas.status'); 
 Route::resource('empresas', EmpresaController::class);
+
+Route::get('datatable/clientes', [DatatableController::class, 'cliente'])->name('datatable.cliente');
 
 Route::post('cargas/guardar', [CargaController::class, 'mguardar'])->name('cargas.guardar');
 Route::post('cargas/guardarbajas', [CargaController::class, 'mguardarbajas'])->name('cargas.guardarbajas');
 Route::get('cargas/status', [CargaController::class, 'status'])->name('cargas.status');
 Route::resource('cargas', CargaController::class);
 
-Route::get('importExportView', 'MyController@importExportView');
+//Route::get('importExportView', 'MyController@importExportView');

@@ -22,11 +22,11 @@ class ClienteController extends Controller
     {
         if(Auth::check()) {
             if(Auth::User()->priv == 'cl'){
-                $clientes = Cliente::where('empresa_id', Auth::User()->company_id)->paginate(500);
+                $clientes = Cliente::where('empresa_id', Auth::User()->company_id)->get();
                 return view('clientes.index', compact('clientes'));
             }
             else {
-                $clientes = Cliente::paginate(500);
+                $clientes = Cliente::all();
                 return view('clientes.index', compact('clientes'));
             }
         }
@@ -78,7 +78,11 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
-        
+        $cliente = Cliente::find($id);
+        $cliente->activo = false;
+        $cliente->save();
+
+        return back();
     }
 
     /**
@@ -104,10 +108,10 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function status(Request $request)
+    public function status($id)
     {
-        $cliente = Cliente::find($request->input('id'));
-        $cliente->activo = $request->input('status');
+        $cliente = Cliente::find($id);
+        $cliente->activo = false;
         $cliente->save();
 
         return back();

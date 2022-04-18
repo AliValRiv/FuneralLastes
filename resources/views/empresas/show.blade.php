@@ -46,4 +46,6 @@ Empresa
         </div>
     </div>
 </div>
+
+<script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
 @endsection

@@ -290,6 +290,12 @@
 </div>
 <!--end::Modal - BAJA DE REGISTROS - New Card-->
 <!--end::Modals-->
+
+@section('scripts')
+<script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
+<script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+@endsection
+
 <script type="text/javascript">// < ![CDATA[
 	function Buscar() {
 		var tabla = document.getElementById('kt_customers_table');
@@ -314,5 +320,6 @@
 		}
 	}
 // ]]></script>
+<script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
 @endsection
 
