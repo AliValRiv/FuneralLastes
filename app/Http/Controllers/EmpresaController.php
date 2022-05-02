@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Empresa;
 use App\Models\Cliente;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class EmpresaController extends Controller
@@ -17,7 +18,7 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        $empresas = Empresa::all();
+        $empresas = DB::select('SELECT `empresas`.`id`,`empresas`.`nombre`,`empresas`.`activo`,SUM(case when `clientes`.`activo` then 1 else 0 end) as cuenta from `empresas` INNER JOIN `clientes` ON `empresas`.`id` = `clientes`.`empresa_id` GROUP By `empresas`.`id`,`empresas`.`nombre`,`empresas`.`activo`');
         return view('empresas.index', ['empresas' => $empresas]);
     }
 

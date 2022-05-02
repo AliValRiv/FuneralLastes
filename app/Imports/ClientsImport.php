@@ -14,8 +14,9 @@ use App\Group;
 use App\User;
 use Maatwebsite\Excel\Row;
 use Maatwebsite\Excel\Concerns\OnEachRow;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
 
-class ClientsImport implements ToModel, WithUpserts, WithHeadingRow, WithValidation
+class ClientsImport implements ToModel, WithUpserts, WithHeadingRow, WithValidation, WithBatchInserts
 {
     //private $numRows = 0;
     /**
@@ -25,7 +26,6 @@ class ClientsImport implements ToModel, WithUpserts, WithHeadingRow, WithValidat
     */
     public function model(array $row)
     {
-        //try{
             return new Cliente([
                 'empleado' => $row['empleado'],
                 'empresa_id' => Auth::User()->company_id,
@@ -49,41 +49,6 @@ class ClientsImport implements ToModel, WithUpserts, WithHeadingRow, WithValidat
                 'opc6' => $row['opc6'],
                 'activo' => true,
             ]);
-        /* 
-        catch(\Exception $ex){
-            return back()->withError($ex);
-        } */
-
-        /* foreach($rows as $row){
-            try{
-            $cliente = Cliente::updateOrCreate([
-                'empleado' => $row['empleado'],
-                'empresa_id' => Auth::User()->company_id],[
-                'paterno' => $row['paterno'],
-                'materno' => $row['materno'],
-                'nombre' => $row['nombre'],
-                'genero' => $row['genero'],
-                'fecha_nacimiento' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_nacimiento']),
-                'fecha_inicio' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_inicio']),
-                'fecha_fin' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_fin']),
-                'curp' => $row['curp'],
-                'rfc' => $row['rfc'],
-                'nss' => $row['nss'],
-                'telefono' => $row['telefono'],
-                'email' => $row['email'],
-                'opc1' => $row['opc1'],
-                'opc2' => $row['opc2'],
-                'opc3' => $row['opc3'],
-                'opc4' => $row['opc4'],
-                'opc5' => $row['opc5'],
-                'opc6' => $row['opc6'],
-                'activo' => true,
-            ]);
-            }
-            catch(\Exception $ex){
-                return back()->withError($ex)->withInput();
-            }
-        } */
     }
 
     public function uniqueBy()

@@ -7,8 +7,10 @@ use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
+use Maatwebsite\Excel\Concerns\WithUpserts;
 
-class ClientsDelete implements ToModel, WithHeadingRow, WithValidation
+class ClientsDelete implements ToModel, WithHeadingRow, WithValidation, WithBatchInserts, WithUpserts
 {
     private $numRows = 0;
     /**
@@ -22,9 +24,14 @@ class ClientsDelete implements ToModel, WithHeadingRow, WithValidation
         
 
         return new Cliente([
-            'empleado' => $row['empleado'],
+            'empleado' => (string)$row['empleado'],
         ]);
         
+    }
+
+    public function uniqueBy()
+    {
+        return 'unique_index';
     }
  
     public function rules(): array
@@ -33,6 +40,11 @@ class ClientsDelete implements ToModel, WithHeadingRow, WithValidation
             'empleado' => 'required|unique:clientes,empleado|max:100',
             
         ];
+    }
+
+    public function batchSize(): int
+    {
+        return 500;
     }
  
     public function getRowCount(): int

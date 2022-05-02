@@ -139,7 +139,7 @@ class CargaController extends Controller
             
             $nombre = $request->input('email').'_'.date('Y-m-d_H-i-s')."_baja.".$file->guessExtension();
 
-            $ruta = public_path("cargas/".$nombre);
+            $ruta = public_path("bajas/".$nombre);
 
             if($file->guessExtension()=="xlsx" or $file->guessExtension()=="xls"){
                 
@@ -147,7 +147,7 @@ class CargaController extends Controller
 
                 foreach($clientes as $cli){
                     foreach($cli as $row){
-                        Cliente::where('empleado',$row['empleado'])->where('empresa_id',Auth::User()->company_id)->update(['activo' => false]);
+                        Cliente::where((string)'empleado',(string)$row['empleado'])->where('empresa_id',Auth::User()->company_id)->update(['activo' => false]);
                         $contador++;
                     }
                 }

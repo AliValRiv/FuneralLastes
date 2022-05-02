@@ -79,7 +79,12 @@ class ClienteController extends Controller
     public function edit($id)
     {
         $cliente = Cliente::find($id);
-        $cliente->activo = false;
+        if ($cliente->activo == true) {
+            $cliente->activo = false;
+        } 
+        else {
+            $cliente->activo = true;
+        }
         $cliente->save();
 
         return back();

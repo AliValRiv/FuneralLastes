@@ -272,7 +272,7 @@
 						</div>
 						<!--end::Input group-->
 						<button type="reset" id="kt_customers_export_cancel" class="btn btn-light me-3">Limpiar</button>
-						<button type="submit" id="kt_delete_customers" class="btn btn-primary">
+						<button type="submit" id="kt_delete_customers" class="btn btn-primary" onClick="this.form.submit(); this.value='Enviando...'; this.disabled=true;">
 							<span class="indicator-label">Importar Bajas</span>
 							<span class="indicator-progress">Por favor espere...
 							<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>

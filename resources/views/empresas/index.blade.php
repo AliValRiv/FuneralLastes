@@ -51,6 +51,7 @@
 					</th>	
 					<th class="min-w-125px">ID</th>
 					<th class="min-w-125px">Empresa</th>
+					<th class="min-w-125px">Registros</th>
 					<th class="text-end min-w-70px">Acciónes</th>
 				</tr>
 				<!--end::Table row-->
@@ -75,6 +76,9 @@
 						@else
 							<a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $empresa->nombre }}</a>
 						@endif
+					</td>
+					<td>
+						<a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $empresa->cuenta }}</a>
 					</td>
 					<!--begin::Action=-->
 					<td class="text-end">

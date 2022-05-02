@@ -24,8 +24,7 @@
 						<th>Materno</th>
 						<th>Nombre</th>
 						<th>Fecha Nacimiento</th>
-						<th>Fecha Inicio Vigencia</th>
-						<th>Fecha Fin Vigencia</th>
+						<th>Estauts</th>
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>
 					</tr>
@@ -56,8 +55,7 @@
 					{data: 'materno'},
 					{data: 'nombre'},
 					{data: 'fecha_nacimiento'},
-					{data: 'fecha_inicio'},
-					{data: 'fecha_fin'},
+					{data: 'estatus'},
 					{data: 'ver'},
 					{data: 'status'},
 				], 
