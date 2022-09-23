@@ -14,6 +14,8 @@ class Cliente extends Model
         'opc4',
         'opc5',
         'opc6',
+        'estatus',
+        'otorgado',
     ];
 
     public function empresa()

@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 use Hash;
 use Session;
 use App\Models\User;
-use App\Models\Cliente;
 use App\Models\Carga;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 use Twilio\Rest\Client;
+use DB;
 
 
 class CustomAuthController extends Controller
@@ -119,7 +119,19 @@ class CustomAuthController extends Controller
             if (Auth::User()->verified) {
                 if(Auth::User()->priv == 'cl' && Auth::User()->company_id != 1){
                     $cargas = Carga::where('company_id', Auth::User()->company_id)->get();
-                    return view('dashboard', ['cargas' => $cargas]);
+                    $tot = DB::table('clientes')
+                        ->where('empresa_id', Auth::User()->company_id)
+                        ->count();
+                    $act = DB::table('clientes')
+                        ->where('empresa_id', Auth::User()->company_id)
+                        ->where('activo', true)
+                        ->count();
+                    $ina = DB::table('clientes')
+                        ->where('empresa_id', Auth::User()->company_id)
+                        ->where('activo', false)
+                        ->count();   
+                        // dd("Totales: ".$tot."  Activos: ".$act."  Inactivos: ".$ina);
+                    return view('dashboard', ['cargas' => $cargas , 'tot' => $tot , 'act' => $act , 'ina' => $ina]);
                 }
                 else {
                     $cargas = Carga::all();

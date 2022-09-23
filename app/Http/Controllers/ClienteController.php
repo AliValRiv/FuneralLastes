@@ -26,7 +26,9 @@ class ClienteController extends Controller
                 return view('clientes.index', compact('clientes'));
             }
             else {
-                $clientes = Cliente::all();
+                //$clientes = Cliente::all();
+                $clientes = Cliente::where('activo',1)
+                    ->select('id','empresa_id','empleado','paterno','materno','nombre','fecha_nacimiento','estatus')->get();
                 return view('clientes.index', compact('clientes'));
             }
         }
@@ -97,9 +99,30 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function otorgarserv(Request $request)
     {
         $cliente = Cliente::find($id);
+        if ($cliente->estatus === true) {
+            $cliente->estatus = false;
+            $cliente->otorgado = Carbon::createFromFormat('d/m/Y', $request['otorgado']);
+            $cliente->save();
+        } 
+
+        return back();
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //dd($request);
+        $cliente = Cliente::find($id);
+        //dd($cliente);
 
         $cliente->fill($request->all())->save();
 

@@ -139,7 +139,7 @@ class CargaController extends Controller
             
             $nombre = $request->input('email').'_'.date('Y-m-d_H-i-s')."_baja.".$file->guessExtension();
 
-            $ruta = public_path("bajas/".$nombre);
+            $ruta = public_path("cargas/".$nombre);
 
             if($file->guessExtension()=="xlsx" or $file->guessExtension()=="xls"){
                 

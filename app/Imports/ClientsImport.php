@@ -5,19 +5,26 @@ namespace App\Imports;
 use App\Models\Cliente;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
-use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Concerns\WithUpserts;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Concerns\WithValidation;
 
 use App\Group;
 use App\User;
-use Maatwebsite\Excel\Row;
-use Maatwebsite\Excel\Concerns\OnEachRow;
-use Maatwebsite\Excel\Concerns\WithBatchInserts;
 
-class ClientsImport implements ToModel, WithUpserts, WithHeadingRow, WithValidation, WithBatchInserts
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\WithUpserts;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
+use Maatwebsite\Excel\Row;
+use Illuminate\Contracts\Queue\ShouldQueue;
+//use Maatwebsite\Excel\Concerns\WithBatchInserts;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
+
+
+use Carbon\Carbon;
+
+class ClientsImport implements ToModel, WithUpserts, WithHeadingRow, WithValidation,  WithChunkReading//, ShouldQueue //WithBatchInserts,
 {
+    use Importable;
     //private $numRows = 0;
     /**
     * @param array $row
@@ -33,7 +40,7 @@ class ClientsImport implements ToModel, WithUpserts, WithHeadingRow, WithValidat
                 'materno' => $row['materno'],
                 'nombre' => $row['nombre'],
                 'genero' => $row['genero'],
-                'fecha_nacimiento' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_nacimiento']),
+                'fecha_nacimiento' => Carbon::createFromFormat('Y/m/d',$row['fecha_nacimiento']),
                 'fecha_inicio' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_inicio']),
                 'fecha_fin' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_fin']),
                 'curp' => $row['curp'],
@@ -64,9 +71,9 @@ class ClientsImport implements ToModel, WithUpserts, WithHeadingRow, WithValidat
             'materno' => 'nullable|max:255',
             'nombre' => 'required|max:255',
             'genero' => 'nullable|max:1',
-            'fdn' => 'nullable|date_format:d/m/y',
-            'fdi' => 'nullable|date_format:d/m/y',
-            'fdf' => 'nullable|date_format:d/m/y',
+            'fdn' => 'nullable|date_format:d/m/Y',
+            'fdi' => 'nullable|date_format:d/m/Y',
+            'fdf' => 'nullable|date_format:d/m/Y',
             'curp' => 'nullable|max:18',
             'rfc' => 'nullable|max:13',
             'nss' => 'nullable|max:15',
@@ -82,20 +89,34 @@ class ClientsImport implements ToModel, WithUpserts, WithHeadingRow, WithValidat
         
     }
     
-    public function batchSize(): int
+   /*  public function batchSize(): int
     {
-        return 500;
+        return 1000;
+    } */
+
+    public function chunkSize(): int
+    {
+        return 1000;
     }
 
-    public function dateColumns(): array
+    /* public function dateColumns(): array
     {
         try{
         return [['fecha_nacimiento' => 'd/m/Y', 'fdn'],['fecha_inicio' => 'd/m/Y', 'fdi'],['fecha_fin' => 'd/m/Y', 'fdf']];
         }
+        catch(\ErrorException $e){
+            return back()->withError($e)->withInput();
+        }
         catch(\Error $e){
             return back()->withError($e)->withInput();
         }
-    }
+        catch(\InvalidArgumentException $e){
+            return back()->withError($e)->withInput();
+        }
+        catch(\TypeError $e){
+            return back()->withError($e)->withInput();
+        }
+    } */
  
     public function getRowCount(): int
     {

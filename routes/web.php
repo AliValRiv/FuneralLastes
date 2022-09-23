@@ -37,6 +37,7 @@ Route::post('users/profile', [UserController::class, 'update_profile'])->name('u
 Route::resource('users', UserController::class);
 Route::post('clientes/status', [ClienteController::class, 'status'])->name('clientes.status'); 
 Route::get('clientes/index', [ClienteController::class, 'index'])->name('clientes.index');
+Route::post('clientes/otorgarserv', [ClienteController::class, 'otorgarserv'])->name('clientes.otorgarserv');
 Route::resource('clientes', ClienteController::class);
 Route::get('empresas/status', [EmpresaController::class, 'status'])->name('empresas.status'); 
 Route::resource('empresas', EmpresaController::class);

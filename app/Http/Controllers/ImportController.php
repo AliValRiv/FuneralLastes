@@ -38,8 +38,10 @@ class ImportController extends Controller
             $file=$request->file("file");
 
             if($file->guessExtension()=="xlsx" or $file->guessExtension()=="xls" /* or $file->guessExtension()=="csv" */){
+                Excel::import(new ClientsImport,request()->file('file'));
+                //Excel::queueImport(new ClientsImport,request()->file('file'));
                 try{
-                    Excel::import(new ClientsImport,request()->file('file'));
+                    Excel::queueImport(new ClientsImport,request()->file('file'));
                 }     
                 catch(\InvalidArgumentException $ex){
                     return redirect('dashboard')
@@ -51,11 +53,11 @@ class ImportController extends Controller
                             ->withErrors("Existe un error columnas de fechas.")
                             ->withInput();
                 }
-                catch(\ErrorExeption $ex){
+                catch(\ErrorException $ex){
                     return redirect('dashboard')
-                            ->withErrors("Existe un error columnas de fechas.")
+                            ->withErrors("Existe un error columnas de fechas. Verificar formato.")
                             ->withInput();
-                } 
+                }
                 
                 $nombre = $request->input('email').'_'.date('Y-m-d_H-i-s')."_alta.".$file->guessExtension();
                 $ruta = public_path("cargas/".$nombre);
@@ -79,7 +81,7 @@ class ImportController extends Controller
             }
             else{
                 return redirect('dashboard')
-                        ->withErrors("No es un archivo valido. Tiene que ser tipo xlsx, xls o csv.")
+                        ->withErrors("No es un archivo valido. Tiene que ser tipo xlsx o xls.")
                         ->withInput();
             }
         }

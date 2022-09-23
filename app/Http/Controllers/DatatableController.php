@@ -24,14 +24,14 @@ class DatatableController extends Controller
                         ->toJson();
             }
             else { 
-                $clientes = DB::select('SELECT `clientes`.`id`,`empresas`.`nombre` as nombre_empresa,`clientes`.`empleado`,`clientes`.`paterno`,`clientes`.`materno`,`clientes`.`nombre`,`clientes`.`fecha_nacimiento`,CASE WHEN `clientes`.`activo` = true THEN "Activo" ELSE "Inactivo" END as estatus FROM `clientes` INNER JOIN `empresas` ON `clientes`.`empresa_id`=`empresas`.`id`');
+                $clientes = DB::select('SELECT `clientes`.`id`,`empresas`.`nombre` as nombre_empresa,`clientes`.`empleado`,`clientes`.`paterno`,`clientes`.`materno`,`clientes`.`nombre`,`clientes`.`fecha_nacimiento`,CASE WHEN `clientes`.`activo` = true THEN "Activo" ELSE "Inactivo" END as estatus FROM `clientes` INNER JOIN `empresas` ON `clientes`.`empresa_id`=`empresas`.`id`'); 
                 //$clientes = Cliente::select('clientes.id','empresas.nombre as nombre_empresa','clientes.empleado','clientes.paterno','clientes.materno','clientes.nombre','clientes.fecha_nacimiento','CASE WHEN clientes.activo = true THEN 1 ELSE 2 END as cliente_estatus')
                             //->join('empresas','clientes.empresa_id','=','empresas.id')->get();
                 return datatables()->of($clientes)
-                                    ->addColumn('ver','<a href="{{ route(\'clientes.show\', $id) }}" class="btn btn-primary">'.('Ver').'</a>')
-                                    ->addColumn('status','')
-                                    ->rawColumns(['ver'])
-                                    ->toJson();
+                        ->addColumn('ver','<a href="{{ route(\'clientes.show\', $id) }}" class="btn btn-primary">'.('Ver').'</a>')
+                        ->addColumn('status','')
+                        ->rawColumns(['ver','status'])
+                        ->toJson();
             }
         }
     }

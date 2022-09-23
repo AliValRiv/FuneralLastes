@@ -14,7 +14,7 @@ Contacto
                     
                 </div>
             </div>
-            <form class="form" action="{{ route('clientes.update', $cliente->id) }}" method="POST" id="kt_modal_add_customer_form" data-kt-redirect="../../demo6/dist/apps/customers/list.html">
+            <form class="form" action="{{ route('clientes.update', $cliente->id) }}" method="POST" id="kt_modal_add_customer_form" >
                 @csrf
                 {{ method_field('PATCH') }}
                 <input type="hidden" name="empresa_id" value="{{ Auth::User()->company_id }}">
@@ -209,6 +209,7 @@ Contacto
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->
+                        
                     </div>
                 <div class="card-footer">
                     <!--begin::Buttons-->
@@ -223,6 +224,52 @@ Contacto
                         <span class="indicator-label">Regresar</span>
                     </button>
                     <!--end::Buttons-->
+                </div>
+            </form>
+            <form class="form" action="{{ route('clientes.update', $cliente->id) }}" method="POST" id="otorgamiento_form">
+                @csrf
+                {{ method_field('PATCH') }}
+                <div class="card-header">
+                    <h3 class="card-title">Estatus de servicio</h3>
+                    <div class="card-toolbar">
+                        
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-7">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-bold mb-2">Otorgado</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <select class="form-select" aria-label="situacion" name="estatus">
+                                    <option>Cambiar situación</option>
+                                    <option value="0" {{$cliente->estatus === 0 ? 'selected':''}}>Otorgado</option>
+                                    <option value="1" {{$cliente->estatus === 1 ? 'selected':''}}>No otorgado</option>
+                                </select>
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-bold mb-2">Fecha Otorgamiento</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="date" class="form-control form-control-solid" placeholder="dd/MM/yyyy" name="otorgado" value='{{ $cliente->otorgado }}'/>
+                                <!--end::Input-->
+                            </div>
+                    <div class="card-footer">
+                        <!--begin::Buttons-->
+                        @if(Auth::User()->priv != 'cl')
+                        <button type="submit" id="otorgamiento_submit" class="btn btn-danger">
+                            <span class="indicator-label">Otorgar</span>
+                            <span class="indicator-progress">Por favor espere...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                        @endif
+                        <!--end::Buttons-->
+                    </div>
                 </div>
             </form>
         </div>

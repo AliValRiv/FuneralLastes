@@ -24,7 +24,7 @@
 						<th>Materno</th>
 						<th>Nombre</th>
 						<th>Fecha Nacimiento</th>
-						<th>Estauts</th>
+						<th>Estatus</th>
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>
 					</tr>
@@ -76,7 +76,9 @@
 				"sInfoEmpty": "Mostrando resultados del 0 al 0 de un total de 0 registros",
 				"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
 				"sSearch": "Buscar ",
-				"sLoadingRecords": "Cargando...",
+				"sLoadingRecords": '<div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>',
+				//"sLoadingRecords": '<div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>',
+				//"sLoadingRecords": '<i class="fa fa-spinner fa-spin fa-4x red-text"></i>',
 				"oPaginate": {
 					"sFirst": "Primero",
 					"sLast": "Ultimo",
@@ -90,6 +92,7 @@
 				
         		"scrollX": true
 			});
+
 		} );
 	</script>
 @endsection

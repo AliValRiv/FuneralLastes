@@ -22,6 +22,9 @@
 					</svg>
 				</span>
 				<input type="text" id="txtBusqueda" onkeyup="Buscar();" class="form-control form-control-solid w-250px ps-15" placeholder="Búsqueda" />
+				@if(Auth::User()->priv === 'cl')
+				<span class="text-start text-black-500 fw-bolder fs-7 text-uppercase gs-0">  Total de Registros {{ $tot }}, activos {{ $act }}, inactivos {{ $ina }}</span>
+				@endif
 			</div>
 
 			<!--end::Search-->
